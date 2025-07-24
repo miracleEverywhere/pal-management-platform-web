@@ -19,7 +19,7 @@ const globalStore = defineStore("auth", {
         nickname: '',
         role: '',
       },
-      token: 'xsd3ds',
+      token: '',
     };
   },
   actions: {
@@ -27,17 +27,73 @@ const globalStore = defineStore("auth", {
 
     },
     getMenus() {
-
+      this.menus = [
+        {
+          id: 1,
+          type: 'link',
+          section: "Hello World",
+          title: 'Home',
+          icon: 'ri-table-alt-line',
+          to: '/home',
+          href: '',
+          target: '',
+          badgeContent: '',
+        },
+        {
+          id: 2,
+          type: 'group',
+          section: "Fuck World",
+          title: 'tables',
+          badgeContent: '',
+          badgeClass: '',
+          icon: 'ri-home-smile-line',
+          links: [
+            {
+              id: 20001,
+              title: 'Analytics',
+              icon: 'ri-home-smile-line',
+              to: '/tables',
+              href: '',
+              target: '',
+              badgeContent: '',
+            },
+          ],
+        },
+        {
+          id: 3,
+          type: 'group',
+          section: "",
+          title: 'Love',
+          badgeContent: '',
+          badgeClass: '',
+          icon: 'ri-home-smile-line',
+          links: [
+            {
+              id: 30001,
+              title: 'LoveWorld',
+              icon: 'ri-home-smile-line',
+              to: '/cards',
+              href: '',
+              target: '',
+              badgeContent: '',
+            },
+          ],
+        },
+      ]
     },
     getUserInfo() {
 
     },
-    clearStore() {
-
+    setToken(token) {
+      this.token = token
     }
   },
   // 计算属性，和vuex是使用一样，getters里面不是方法，是计算返回的结果值
-  getters: {}
+  getters: {
+    getToken(state) {
+      return state.token
+    }
+  }
 });
 
 // 对外暴露方法
