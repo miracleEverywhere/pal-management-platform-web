@@ -23,6 +23,65 @@ const authStore = defineStore("auth", {
     };
   },
   actions: {
+    async getMenus() {
+      this.menus = [
+        {
+          id: 1,
+          type: 'link',
+          section: "Hello World",
+          title: '首页',
+          component: 'home/index',
+          icon: 'ri-table-alt-line',
+          to: '/home',
+          href: '',
+          target: '',
+          badgeContent: '',
+        },
+        {
+          id: 2,
+          type: 'group',
+          section: "",
+          title: '设置',
+          badgeContent: '',
+          badgeClass: '',
+          icon: 'ri-home-smile-line',
+          links: [
+            {
+              id: 20001,
+              title: 'Player',
+              component: 'settings/player',
+              icon: 'ri-home-smile-line',
+              to: '/settings/player',
+              href: '',
+              target: '',
+              badgeContent: '',
+            },
+            {
+              id: 20002,
+              title: 'Room',
+              component: 'settings/room',
+              icon: 'ri-home-smile-line',
+              to: '/settings/room',
+              href: '',
+              target: '',
+              badgeContent: '',
+            },
+          ],
+        },
+        {
+          id: 3,
+          type: 'link',
+          section: "Hello World",
+          title: '帮助',
+          component: 'help/index',
+          icon: 'ri-table-alt-line',
+          to: '/help',
+          href: '',
+          target: '',
+          badgeContent: '',
+        },
+      ]
+    },
     clearStore() {
       this.menus = []
       this.userInfo = {

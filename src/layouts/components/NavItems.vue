@@ -12,7 +12,7 @@
         title: menu.title,
         badgeContent: menu.badgeContent,
         badgeClass: menu.badgeClass,
-        icon: menu.icon,
+        icon: menu.icon
       }"
       :is-open="activeGroupId === menu.id"
       @toggle="handleGroupToggle(menu.id)"
@@ -50,60 +50,12 @@
 import VerticalNavSectionTitle from '@/@layouts/components/VerticalNavSectionTitle.vue'
 import VerticalNavGroup from '@layouts/components/VerticalNavGroup.vue'
 import VerticalNavLink from '@layouts/components/VerticalNavLink.vue'
+import useAuthStore from '@/plugins/store/auth.js'
 
-const menus = [
-  {
-    id: 1,
-    type: 'group',
-    section: "Fuck World",
-    title: 'Dashboard',
-    badgeContent: '',
-    badgeClass: '',
-    icon: 'ri-home-smile-line',
-    links: [
-      {
-        id: 10001,
-        title: 'Analytics',
-        icon: 'ri-home-smile-line',
-        to: '/dashboard',
-        href: '',
-        target: '',
-        badgeContent: '',
-      },
-    ],
-  },
-  {
-    id: 2,
-    type: 'link',
-    section: "Hello World",
-    title: 'Tables',
-    icon: 'ri-table-alt-line',
-    to: '/tables',
-    href: '',
-    target: '',
-    badgeContent: '',
-  },
-  {
-    id: 3,
-    type: 'group',
-    section: "",
-    title: 'Love',
-    badgeContent: '',
-    badgeClass: '',
-    icon: 'ri-home-smile-line',
-    links: [
-      {
-        id: 30001,
-        title: 'LoveWorld',
-        icon: 'ri-home-smile-line',
-        to: '/cards',
-        href: '',
-        target: '',
-        badgeContent: '',
-      },
-    ],
-  },
-]
+
+const authStore = useAuthStore()
+
+const menus = authStore.menus
 
 // 当前展开的菜单组ID
 const activeGroupId = ref(null)
