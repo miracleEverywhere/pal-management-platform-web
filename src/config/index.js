@@ -1,1 +1,0 @@
-export const PINIA_PREFIX = 'pmp-'

@@ -48,7 +48,7 @@ export const routes = [
       },
       {
         path: '/:pathMatch(.*)*',
-        component: () => import('@/pages/[...error].vue'),
+        component: () => import('@/components/[...error].vue'),
       },
     ],
   },

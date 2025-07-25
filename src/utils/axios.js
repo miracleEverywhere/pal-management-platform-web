@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { showSnackbar } from '@/utils/snackbar';
-import useAuthStore from '@/plugins/pinia/auth.js'
-import router from "@/plugins/router";
 
-const authStore = useAuthStore()
 
 // 创建一个 axios 实例
 const instance = axios.create({
@@ -14,8 +11,10 @@ const instance = axios.create({
 // 请求拦截器：在请求发送之前添加 token
 instance.interceptors.request.use(
     (config) => {
+        config.baseURL = configStore.inConfig?configStore.url:globalStore.url
+        const token = configStore.inConfig?configStore.token:globalStore.token;
+        config.headers["X-I18n-Lang"] = 'zh'
         // 如果 token 存在，将其添加到请求头中
-      const token = authStore.getToken()
         if (token) {
             config.headers.Authorization = token;
         }
@@ -36,12 +35,6 @@ instance.interceptors.response.use(
             // 这里的后端可能是code OR status 和 message OR message需要看后端传递的是什么？
             // console.log("200状态", status);
             return response.data;
-        } else if (status === 401 || status === 420) {
-          // console.log("401状态", status);
-          authStore.setToken('')
-          showSnackbar("登录身份过期，请重新登录", 'error');
-          router.replace('/login');
-          return Promise.reject(response.data);
         } else {
             showSnackbar(response.data.message || "服务器偷偷跑到火星去玩了", 'error')
             return Promise.reject(response.data.message || "服务器偷偷跑到火星去玩了"); // 可以将异常信息延续到页面中处理，使用try{}catch(error){};

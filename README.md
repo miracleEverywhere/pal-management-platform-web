@@ -1,1 +1,0 @@
-# pal-management-platform-web
